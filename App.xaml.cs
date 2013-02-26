@@ -13,5 +13,13 @@ namespace Palipali
     /// </summary>
     public partial class App : Application
     {
+        private Cache _cache;
+        public Cache Cache { get { return _cache; } }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            _cache = new Cache();
+            base.OnStartup(e);
+        }
     }
 }

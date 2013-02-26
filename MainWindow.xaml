@@ -2,7 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:Palipali" x:Class="Palipali.MainWindow"
-        Title="MainWindow" Height="65" Width="500" WindowStyle="None" ResizeMode="NoResize">
+        Title="MainWindow" Height="65" Width="500" WindowStyle="None" ResizeMode="NoResize"
+    >
     <Window.Resources>
         <ControlTemplate x:Key="SearchResultTemplate" TargetType="{x:Type ListBox}">
             <Grid Width="Auto" Height="Auto">
@@ -46,7 +47,9 @@
             </Rectangle.Fill>
         </Rectangle>
         <Border BorderBrush="#FF959393" BorderThickness="6" HorizontalAlignment="Left" Height="65" Width="500" VerticalAlignment="Top" CornerRadius="4">
-            <TextBox x:Name="tbxSearch" TextWrapping="Wrap" Text="TextBox" BorderBrush="{x:Null}" Foreground="White" Background="#00000000" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Width="200" FontSize="16"/>
+            <TextBox x:Name="tbxSearch" TextWrapping="Wrap" BorderBrush="{x:Null}" Foreground="White" Background="#00000000" HorizontalAlignment="Left" VerticalAlignment="Center" 
+                     Margin="10,0,0,0" Width="200" FontSize="16" >
+            </TextBox>
         </Border>
         <Image x:Name="activeItemIcon" HorizontalAlignment="Center" Height="31" VerticalAlignment="Center" Width="32" Source="{Binding Icon}">
             <Image.DataContext><Binding ElementName="lstSerachResults"></Binding></Image.DataContext>

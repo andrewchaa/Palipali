@@ -24,5 +24,7 @@ namespace Palipali
         {
             InitializeComponent();
         }
+
+        public Cache Cache { get { return ((App) System.Windows.Application.Current).Cache; } }
     }
 }
