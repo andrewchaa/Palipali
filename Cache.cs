@@ -23,7 +23,7 @@ namespace Palipali
             results = new ObservableCollection<SearchResult>();
 
             // load start menu items
-            LoadStartMenu(System.Environment.GetFolderPath(Environment.SpecialFolder.StartMenu));
+            LoadStartMenu(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu));
 //            LoadStartMenu(System.Environment.GetEnvironmentVariable("ALLUSERSPROFILE") + @"\Start Menu");
 
             // A default hint. Not really necessary but can be handy during testing.
