@@ -4,6 +4,7 @@
         xmlns:local="clr-namespace:Palipali" x:Class="Palipali.MainWindow"
         Title="MainWindow" Height="65" Width="500" WindowStyle="None" ResizeMode="NoResize"
     >
+    
     <Window.Resources>
         <ControlTemplate x:Key="SearchResultTemplate" TargetType="{x:Type ListBox}">
             <Grid Width="Auto" Height="Auto">
@@ -22,7 +23,7 @@
                     </VisualStateGroup>
                 </VisualStateManager.VisualStateGroups>
                 <Image Grid.ColumnSpan="1" HorizontalAlignment="Center" Height="32" Margin="3" Grid.RowSpan="2" VerticalAlignment="Center" Width="32" Source="{Binding Icon}" >
-                    <Image.DataContext><local:SearchResult/></Image.DataContext>
+<!--                    <Image.DataContext><local:SearchResult/></Image.DataContext>-->
                 </Image>
                 <TextBlock x:Name="nameText" Grid.ColumnSpan="1" HorizontalAlignment="Left" Height="23" Margin="0,0,-66,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120" Grid.Column="1" Text="{Binding Name}" >
                     <TextBlock.DataContext><local:SearchResult/></TextBlock.DataContext>
@@ -46,11 +47,13 @@
                 </LinearGradientBrush>
             </Rectangle.Fill>
         </Rectangle>
+        
         <Border BorderBrush="#FF959393" BorderThickness="6" HorizontalAlignment="Left" Height="65" Width="500" VerticalAlignment="Top" CornerRadius="4">
             <TextBox x:Name="tbxSearch" TextWrapping="Wrap" BorderBrush="{x:Null}" Foreground="White" Background="#00000000" HorizontalAlignment="Left" VerticalAlignment="Center" 
                      Margin="10,0,0,0" Width="200" FontSize="16" >
             </TextBox>
         </Border>
+        
         <Image x:Name="activeItemIcon" HorizontalAlignment="Center" Height="31" VerticalAlignment="Center" Width="32" Source="{Binding Icon}">
             <Image.DataContext><Binding ElementName="lstSerachResults"></Binding></Image.DataContext>
         </Image>
@@ -59,7 +62,7 @@
         </TextBlock>
         <Popup PlacementTarget="{Binding ElementName=tbxSearch}" IsOpen="True" >
             <Grid Width="350" Height="Auto">
-                <ListBox x:Name="lstSerachResults" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="350" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Background="Black" Foreground="White" BorderThickness="0" Template="{DynamicResource SearchResultTemplate}" SelectedIndex="2">
+                <ListBox x:Name="lstSerachResults" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="350" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Background="Black" Foreground="White" BorderThickness="0" Template="{DynamicResource SearchResultTemplate}" SelectedIndex="2" >
                     <local:SearchResult/>
                     <local:SearchResult/>
                     <local:SearchResult/>

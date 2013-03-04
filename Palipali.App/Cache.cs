@@ -12,18 +12,22 @@ namespace Palipali
     {
         // the search hint
         private string hint;
-        // list of cached items that are able be found by the search
-        List<SearchResult> cached_items;
+        
+        readonly List<SearchResult> _cachedItems;
+
         // collection of results that match the search hint
         ObservableCollection<SearchResult> results;
 
+        private readonly MenuRepository _menuRepository;
+
         public Cache()
         {
-            cached_items = new List<SearchResult>();
             results = new ObservableCollection<SearchResult>();
 
-            // load start menu items
-            LoadStartMenu(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu));
+            _menuRepository = new MenuRepository();
+            _cachedItems = _menuRepository.List(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu)).ToList();
+            
+//            LoadStartMenu(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu));
 //            LoadStartMenu(System.Environment.GetEnvironmentVariable("ALLUSERSPROFILE") + @"\Start Menu");
 
             // A default hint. Not really necessary but can be handy during testing.
@@ -32,19 +36,16 @@ namespace Palipali
 
         public string Hint
         {
-            get
-            {
-                return hint;
-            }
+            get { return hint; }
             set
             {
                 hint = value;
                 results.Clear();
-                foreach (SearchResult sr in cached_items)
+                foreach (SearchResult sr in _cachedItems)
                 {
                     // really simple case-insensitive substring search. anyone can make this better
                     // and it's not really the point of this tutorial, so we'll go ahead and use it. :)
-                    if (sr.Name.ToLower().Contains(hint.ToLower()))
+//                    if (sr.Name.ToLower().Contains(hint.ToLower()))
                         results.Add(sr);
                 }
 
@@ -57,29 +58,6 @@ namespace Palipali
             get
             {
                 return new ReadOnlyObservableCollection<SearchResult>(results);
-            }
-        }
-
-        private void LoadStartMenu(string path)
-        {
-            IWshRuntimeLibrary.WshShell shell = new IWshRuntimeLibrary.WshShell();
-
-            foreach (string file in System.IO.Directory.GetFiles(path))
-            {
-                System.IO.FileInfo fileinfo = new System.IO.FileInfo(file);
-
-                if (fileinfo.Extension.ToLower() == ".lnk")
-                {
-                    IWshRuntimeLibrary.WshShortcut link = shell.CreateShortcut(file) as IWshRuntimeLibrary.WshShortcut;
-                    SearchResult sr = new SearchResult(fileinfo.Name.Substring(0, fileinfo.Name.Length - 4), link.TargetPath, file);
-                    cached_items.Add(sr);
-                }
-            }
-
-            // recurse through the subfolders
-            foreach (string dir in System.IO.Directory.GetDirectories(path))
-            {
-                LoadStartMenu(dir);
             }
         }
 
