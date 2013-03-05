@@ -8,44 +8,41 @@ namespace Palipali
 {
     public class SearchResult
     {
-        private string name;
-        private string command;
-        private string shortcut;
-        private System.Windows.Media.ImageSource icon;
+        private readonly string _name;
+        private readonly string _command;
+        private readonly string _shortcut;
+        private System.Windows.Media.ImageSource _icon;
 
-        /// <summary>Gets the display nome of the search result</summary>
-        public string Name { get { return name; } }
-        /// <summary>Gets the search result's actual command</summary>
-        public string Command { get { return command; } }
-        /// <summary>Gets the filename of the shortcut on disk this result was read from</summary>
-        public string Shortcut { get { return shortcut; } }
+        public string Name { get { return _name; } }
+        public string Command { get { return _command; } }
+        public string Shortcut { get { return _shortcut; } }
 
         /// <summary>Gets a WPF TmageSource for the icon to display for the search result</summary>
         public System.Windows.Media.ImageSource Icon
         {
             get
             {
-                if (icon == null && System.IO.File.Exists(Command))
+                if (_icon == null && System.IO.File.Exists(Command))
                 {
                     using (System.Drawing.Icon sysicon = System.Drawing.Icon.ExtractAssociatedIcon(Command))
                     {
                         // This new call in WPF finally allows us to read/display 32bit Windows file icons!
-                        icon = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
+                        _icon = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
                           sysicon.Handle,
                           System.Windows.Int32Rect.Empty,
                           System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
                     }
                 }
 
-                return icon;
+                return _icon;
             }
         }
 
         public SearchResult(string name, string command, string shortcut)
         {
-            this.name = name;
-            this.command = command;
-            this.shortcut = shortcut;
+            this._name = name;
+            this._command = command;
+            this._shortcut = shortcut;
         }
 
         public SearchResult()
