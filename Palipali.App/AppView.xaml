@@ -22,7 +22,7 @@
 
         <Popup IsOpen="True" >
             <Grid Width="350" Height="200">
-                <ListBox Name="SearchResults" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="350">
+                <ListBox Name="SearchResults" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="350" ItemsSource="{Binding SearchResults}">
                     <ListBox.ItemTemplate>
                         <DataTemplate><TextBlock Text="{Binding Path=Name}" VerticalAlignment="Top" HorizontalAlignment="Left" /></DataTemplate>
                     </ListBox.ItemTemplate>
