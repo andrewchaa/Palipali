@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Interop;
 
 namespace Palipali
 {
@@ -17,6 +18,14 @@ namespace Palipali
         public string Command { get { return _command; } }
         public string Shortcut { get { return _shortcut; } }
 
+        public SearchResult() : this("Calculator", System.Environment.GetFolderPath(Environment.SpecialFolder.System) + @"\calc.exe", string.Empty) {}
+        public SearchResult(string name, string command, string shortcut)
+        {
+            _name = name;
+            _command = command;
+            _shortcut = shortcut;
+        }
+
         /// <summary>Gets a WPF TmageSource for the icon to display for the search result</summary>
         public System.Windows.Media.ImageSource Icon
         {
@@ -27,7 +36,7 @@ namespace Palipali
                     using (System.Drawing.Icon sysicon = System.Drawing.Icon.ExtractAssociatedIcon(Command))
                     {
                         // This new call in WPF finally allows us to read/display 32bit Windows file icons!
-                        _icon = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
+                        _icon = Imaging.CreateBitmapSourceFromHIcon(
                           sysicon.Handle,
                           System.Windows.Int32Rect.Empty,
                           System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
@@ -36,20 +45,6 @@ namespace Palipali
 
                 return _icon;
             }
-        }
-
-        public SearchResult(string name, string command, string shortcut)
-        {
-            this._name = name;
-            this._command = command;
-            this._shortcut = shortcut;
-        }
-
-        public SearchResult()
-            : this("Calculator",
-            System.Environment.GetFolderPath(Environment.SpecialFolder.System) + @"\calc.exe",
-             "")
-        {
         }
     }
 }

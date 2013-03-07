@@ -28,9 +28,9 @@ namespace Palipali
 
                 if (fileinfo.Extension.ToLower() == ".lnk")
                 {
-                    IWshRuntimeLibrary.WshShortcut link = shell.CreateShortcut(file) as IWshRuntimeLibrary.WshShortcut;
-                    SearchResult sr = new SearchResult(fileinfo.Name.Substring(0, fileinfo.Name.Length - 4), link.TargetPath, file);
-                    _searchResults.Add(sr);
+                    var link = shell.CreateShortcut(file) as IWshRuntimeLibrary.WshShortcut;
+                    var searchResult = new SearchResult(fileinfo.Name.Substring(0, fileinfo.Name.Length - 4), link.TargetPath, file);
+                    _searchResults.Add(searchResult);
                 }
             }
 
