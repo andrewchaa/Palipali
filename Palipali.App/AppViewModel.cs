@@ -31,13 +31,13 @@ namespace Palipali
             get { return "Test";  }
         }
 
-        public void SearchBoxKeyUp(KeyEventArgs args)
+        public void SearchBoxKeyDown(KeyEventArgs args)
         {
-            
+            var test = args.Key;
         }
 
         public void SearchTextChanged(string text)
-        {;
+        {
             SearchResults = _allProgramFiles.Where(s => s.Name.ToLower().Contains(text.ToLower()));
         }
 

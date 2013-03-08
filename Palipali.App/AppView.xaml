@@ -9,7 +9,7 @@
             <Rectangle.Fill><LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0"><GradientStop Color="Black"/><GradientStop Color="#FF46465A" Offset="1"/></LinearGradientBrush></Rectangle.Fill>
         </Rectangle>
         <Border BorderBrush="White" BorderThickness="6" HorizontalAlignment="Left" Height="65" Width="500" VerticalAlignment="Top" CornerRadius="4">
-            <TextBox x:Name="SearchBox" cal:Message.Attach="[Event KeyUp] = [Action SearchTextChanged(SearchBox.Text)]" FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}" BorderBrush="{x:Null}" Foreground="White" Background="#00000000" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Width="200" FontSize="16" />
+            <TextBox x:Name="SearchBox" cal:Message.Attach="[Event KeyUp] = [Action SearchTextChanged(SearchBox.Text)]; [Event KeyDown] = [Action SearchBoxKeyDown($eventArgs)]" FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}" BorderBrush="{x:Null}" Foreground="White" Background="#00000000" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,0" Width="200" FontSize="16" />
         </Border>
         <Image x:Name="ActiveItemIcon" HorizontalAlignment="Center" Height="31" VerticalAlignment="Center" Width="32" Source="{Binding Icon}" />
         <TextBlock x:Name="ActiveItemTitle" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" Margin="0,0,10,0" Width="200" />
