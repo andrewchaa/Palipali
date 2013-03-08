@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Input;
 using Caliburn.Micro;
 
@@ -9,6 +10,7 @@ namespace Palipali
     public class AppViewModel : PropertyChangedBase
     {
         private IEnumerable<SearchResult> _allProgramFiles;
+        private string _searchText;
 
         public AppViewModel()
         {
@@ -31,14 +33,38 @@ namespace Palipali
             get { return "Test";  }
         }
 
-        public void SearchBoxKeyDown(KeyEventArgs args)
+        private int _searchResultsSelectedIndex;
+        public int SearchResultsSelectedIndex
         {
-            var test = args.Key;
+            get { return _searchResultsSelectedIndex; }
+            set
+            {
+                _searchResultsSelectedIndex = value;
+                NotifyOfPropertyChange(() => SearchResultsSelectedIndex);
+            }
         }
 
-        public void SearchTextChanged(string text)
+        public void SearchTextChanged(string text, KeyEventArgs args)
         {
-            SearchResults = _allProgramFiles.Where(s => s.Name.ToLower().Contains(text.ToLower()));
+            switch (args.Key)
+            {
+                case Key.Down:
+                    SearchResultsSelectedIndex++;
+                    break;
+
+                case Key.Up:
+                    SearchResultsSelectedIndex--;
+                    break;
+                
+                default:
+                    if (_searchText != text)
+                    {
+                        SearchResults = _allProgramFiles.Where(s => s.Name.ToLower().Contains(text.ToLower()));
+                        _searchText = text;
+                    }
+                    break;
+            }
+
         }
 
         private void ReadProgramsInStartMenu()
