@@ -39,10 +39,15 @@ namespace Palipali
             get { return _searchResultsSelectedIndex; }
             set
             {
+                if (value < 0 || value > SearchResults.Count() - 1) 
+                    return;
+
                 _searchResultsSelectedIndex = value;
                 NotifyOfPropertyChange(() => SearchResultsSelectedIndex);
             }
         }
+
+        public SearchResult SearchResultSelectedItem { get; set; }
 
         public void SearchTextChanged(string text, KeyEventArgs args)
         {
@@ -56,6 +61,10 @@ namespace Palipali
                     SearchResultsSelectedIndex--;
                     break;
                 
+                case Key.Enter:
+                    System.Diagnostics.Process.Start(SearchResultSelectedItem.Shortcut);
+                    break;
+
                 default:
                     if (_searchText != text)
                     {

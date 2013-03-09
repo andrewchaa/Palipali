@@ -16,7 +16,9 @@
 
         <Popup PlacementTarget="{Binding ElementName=SearchBox}" IsOpen="True" >
             <Grid Height="Auto">
-                <ListBox Name="SearchResults" ItemsSource="{Binding SearchResults}" SelectedIndex="{Binding SearchResultsSelectedIndex}" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="350" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Background="Black" Foreground="White" BorderThickness="0" >
+                <ListBox Name="SearchResults" HorizontalAlignment="Left" Height="Auto" VerticalAlignment="Top" Width="350" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden" Background="Black" Foreground="White" BorderThickness="0"
+                         ItemsSource="{Binding SearchResults}" SelectedIndex="{Binding SearchResultsSelectedIndex}" SelectedItem="{Binding SearchResultSelectedItem}"
+                         >
                     <ListBox.ItemTemplate>
                         <DataTemplate>
 
